@@ -23,27 +23,25 @@
 
 <p align="justify"> The Program walk-through is a variation to <a href="https://github.com/DrShah-Quant/PeriodBigPlayers"> PeriodBigPlayers </a> and <a href="https://github.com/DrShah-Quant/PeriodBigPlayer"> PeriodBigPlayersCandlesticks </a> except in this version I have enabled cutomization on the percentile selection, and big players filteration is as a ratio of outstanding shares calculated on daily basis. The significance of this approach is explained in more detail in the following paragraphs. </p>
 
-<p align="justify"> The example run presented here is from a Jupyter Notebook environment. You can run the file using Ctrl+Enter key presses. Alternatively you can run the python script <i>PeriodBigPlayersCandlesticks.py</i> using command <i>python PeriodBigPlayersCandlesticks.py</i> in a command line if you have python installed properly. The program is depended on a CSV file containing stock transactions raw data. In the example presented below, I have used raw data provided by M+ Securities, a Malaysian stock broker. The raw data contains comma separated values organized into the following colums: "Time","Type","Price","Chg","Vol","Value". "Time" is the time when the transaction occured. "Type" refers to the type of transaction such as buy, close, and open. "Price" refers to the price the share was transacted. "Chg" refers to the difference from the previous price. "Vol" refers to the transaction volume measured in lot sizes (1 lot = 100 shares). And finally "Value" refers to the value of the trasaction (i.e. no of shares x share price). </p>
+<p align="justify"> The example run presented here is from a Jupyter Notebook environment. You can run the file using Ctrl+Enter key presses. Alternatively you can run the python script <i>DailyBigPlayerCandlestickWithPercentileRank.py</i> using command <i>python DailyBigPlayerCandlestickWithPercentileRank.py</i> in a command line if you have python installed properly. The program is depended on a CSV file containing stock transactions raw data. In the example presented below, I have used raw data provided by M+ Securities, a Malaysian stock broker. The raw data contains comma separated values organized into the following colums: "Time","Type","Price","Chg","Vol","Value". "Time" is the time when the transaction occured. "Type" refers to the type of transaction such as buy, close, and open. "Price" refers to the price the share was transacted. "Chg" refers to the difference from the previous price. "Vol" refers to the transaction volume measured in lot sizes (1 lot = 100 shares). And finally "Value" refers to the value of the trasaction (i.e. no of shares x share price). </p>
 
 <p align="center">
 Sample CSV raw data : <br/>
 <img src="https://i.imgur.com/ZwC3mJi.png" height="80%" width="80%" />
 <br />
  <br/>
-Launch the Program and enter CSV data file location : <br/>
+Launch the Program and enter CSV data file location, percentile, and outstanding shareholders : <br/>
 <img src="https://i.imgur.com/KPWRSbx.png" height="80%" width="80%"/>
 <br />
 <br />
 Legend:  <br/>
 <img src="https://i.imgur.com/SJArPMm.png" height="80%" width="80%" />
 <br />
- <p align="justify">The legend lists the percentile rank achieved by buy and sell transactions at the 80th percentile for the whole of the period in consideration (i.e. the CVS dataset date range). In the example, top 20% (i.e. above percentile 80) buy volumes are all over 200 lots (percentile rank = 200) and top 20% sell volumes are all over 100 lots. </p>
-
 <br />
-Above 80 percentile buy/sell volume transactions along with Japanese Candlestics: <br/>
+Above X percentile buy/sell volume transactions along with Japanese Candlestics: <br/>
 <img src="https://i.imgur.com/jTvHRG4.png" height="80%" width="80%" />
 <br />
- <p align="justify"> The figure above shows periodic time series illustrating the top 20% volume transactions along with Japanese Candlestics. Assuming big players (e.g. fund managers, high net worth individuals, etc) transact in large quantities, from this figure we can know at what price and when the transactions occur. The percentile rank (as found in the legend) indicates us on the reliability of our assumption -- it is more reliable if the percentile rank is above the average of a longer period. The augmented Japanese Candlesticks adds more insights (e.g. big players transactions at open and close, also along the body and tails).  </p>
+ <p align="justify"> The figure above shows periodic time series illustrating the top X% volume transactions along with Japanese Candlestics. Assuming big players (e.g. fund managers, high net worth individuals, etc) transact in large quantities, from this figure we can know at what price and when the transactions occur. This program provides flexibility to the users to determine the X percentile. Further, the percentile calculation is done on the ratio of volume/outstanding shares over all the transactions of the day. In <a href="https://github.com/DrShah-Quant/PeriodBigPlayers"> PeriodBigPlayers </a> and <a href="https://github.com/DrShah-Quant/PeriodBigPlayer"> PeriodBigPlayersCandlesticks </a>, i have interpreted big players in an absolute manner for the period in interest (specified by the number of CSV files -- each CSV file provides transactions for a day), however, in this program, the big players are interpreted in relative manner relaive to outstanding shares. Users can also specity the percentile, so for example, if the percentile is 70%, then the program will pick top daily 30% big players relative to outstanding shares. The augmented Japanese Candlesticks adds more insights (e.g. big players transactions at open and close, also along the body and tails).  </p>
 <br />
 Number of buy and sell transactions with volume per buy (or sell) transaction along with Japanese Candlestics:  <br/>
 <img src="https://i.imgur.com/QCPxhJ8.png" height="80%" width="80%" />
